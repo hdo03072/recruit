@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: recruit-admin
+
+  profiles:
+    default: dev
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: validate
+      database-platform: org.hibernate.dialect.MariaDB53Dialect
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+
+  messages:
+    basename: messages, errors
+
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 800MB
+  data:
+    web:
+      pageable:
+        default-page-size: 15
+
+#  lifecycle:
+#    timeout-per-shutdown-phase: 60s
+
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  thymeleaf:
+    cache: false

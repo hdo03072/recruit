@@ -1,0 +1,31 @@
+server:
+  port: 8881
+
+  servlet:
+    session:
+      timeout: 1440m
+      cookie:
+        max-age: 1440m
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:mariadb://175.120.75.182:3306/hs?characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: hs
+    password: hs!@
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+
+logging.level:
+  org.hibernate.SQL: info
+
+file:
+  dir: /home/recruit/upload/file/
+  temp: /home/recruit/upload/temp/

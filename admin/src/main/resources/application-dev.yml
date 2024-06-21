@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mariadb://175.120.75.182:3306/hs?characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: hs
+    password: hs!@
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+logging.level:
+  org.hibernate.SQL: debug
+
+file:
+  dir: C:/upload/file/
+  temp: C:/upload/temp/
