@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block id="css">
+    </th:block>
+
+    <th:block id="script">
+    </th:block>
+
+</head>
+<body>
+<section>
+    <div th:replace="layout/pageTitle :: pageTitle ('대시보드')"></div>
+
+</section>
+</body>
+</html>

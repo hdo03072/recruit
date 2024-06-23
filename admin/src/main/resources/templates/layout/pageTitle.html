@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div th:fragment="pageTitle (pageTitle)" class="page_title">
+        <h1 th:text="${pageTitle}"></h1>
+
+        <ul>
+            <li>
+                <em>관리자 </em>
+                <span sec:authentication="principal.name"></span>님
+            </li>
+            </a></li>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+        </ul>
+    </div>
+</body>
+</html>

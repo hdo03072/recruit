@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:fragment="layout (pageCss, pageScript, content)"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>채용 관리자 페이지</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/earlyaccess/notosanskr.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/summernote/summernote-lite.css}">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css}">
+
+    <!-- Page Css -->
+    <th:block th:replace="${pageCss}"></th:block>
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/lib/summernote/summernote-lite.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/summernote/lang/summernote-ko-KR.js}"></script>
+
+<!--    <script type="text/javascript" th:src="@{/js/nav.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+
+    <!-- Page Script -->
+    <th:block th:replace="${pageScript}"></th:block>
+</head>
+<body>
+    <div class="wrap">
+        <nav th:insert="layout/sidebar :: navigation"></nav>
+
+        <div th:insert="${content}" class="container"></div>
+    </div>
+</body>
+</html>
