@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block id="css">
+    </th:block>
+
+    <th:block id="script">
+        <script type="text/javascript" th:src="@{/js/notice/board.js}"></script>
+    </th:block>
+
+</head>
+<body>
+<section>
+    <div>
+        <span>공지 관리</span>
+
+        <table>
+            <colgroup>
+                <col width="5%">
+                <col width="5%">
+                <col width="60%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <tr>
+                <th>
+                    <input type="checkbox" check="all">
+                </th>
+                <th th:text="#{table.no}"></th>
+                <th th:text="#{table.title}"></th>
+                <th th:text="#{table.file}"></th>
+                <th th:text="#{table.writer}"></th>
+                <th th:text="#{table.date}"></th>
+            </tr>
+            <tr th:each="notice: ${result.content}">
+                <td>
+                    <input type="checkbox" th:value="${notice.id}">
+                </td>
+                <td>
+                    <span th:replace="~{util/tableNum :: tableNum(${noticeStat.index})}"></span>
+                </td>
+                <td th:text="${notice.title}"></td>
+
+                <td th:if="${notice.files.size() > 0}"O</td>
+                <td th:if="${notice.files.size() <= 0}">X</td>
+
+                <td th:text="${notice.admin.name}"></td>
+                <td th:text="${notice.createdAt}"></td>
+            </tr>
+        </table>
+
+        <div th:replace="~{util/pagination :: pagination(${result})}"></div>
+
+        <div>
+            <button type="button" onclick="pageObj.delete()" th:text="#{btn.sel.del}"></button>
+            <button type="button" onclick="$view.add()" th:text="#{btn.add}"></button>
+        </div>
+    </div>
+</section>
+</body>
+</html>

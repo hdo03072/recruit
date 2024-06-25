@@ -1,0 +1,20 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <div th:fragment="modal(id)" th:id="${id}" class="modal fade">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3></h3>
+                <button type="button" th:onclick="$modal().close([[${id}]])">
+                    <span aria-hidden="true"><img th:src="@{/images/common/close.svg}"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -35,7 +35,7 @@
 <body>
     <div class="wrap">
         <!-- 사이드바 할거면 사이드바로 하면되고 헤더로 할거면 헤더로 하면 됩니다. 그건 소은씨 자유-->
-        <nav th:insert="layout/sidebar :: navigation"></nav>
+        <nav th:insert="~{layout/sidebar :: navigation}"></nav>
 
         <div th:insert="${content}" class="container"></div>
     </div>

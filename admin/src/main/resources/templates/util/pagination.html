@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="pagination(pageResult)" class="pagination" th:object="${pageResult}">
+    <ul th:with="blockSize=10, number = *{number}, totalPages = *{totalPages},
+                start=${T(java.lang.Math).floor(number/blockSize)*blockSize + 1},
+                end=(${totalPages==0? 1 : start + 9 < totalPages ? start + 9 : totalPages}),
+                prevBlock=${(number/blockSize*blockSize)-blockSize > 0 ? (number/blockSize*blockSize)-blockSize+9 : 9},
+                nextBlock=${(number/blockSize*blockSize)+blockSize < totalPages ? (number/blockSize*blockSize)+blockSize : totalPages-1}">
+
+        <li>
+            <button name="page" th:value="0"> << </button>
+        </li>
+
+        <li>
+            <button name="page" th:value="${prevBlock}"> < </button>
+        </li>
+
+<!--        <li th:each="page : ${#numbers.sequence(start, end)}" th:classappend="${page eq pageResult.number + 1}?'pagination_active'">-->
+<!--            <button name="page" th:text="${page}" th:value="${page-1}"></button>-->
+<!--        </li>-->
+        <li th:each="page : ${#numbers.sequence(start, end)}">
+            <button name="page" th:text="${page}" th:value="${page-1}"></button>
+        </li>
+
+        <li>
+            <button name="page" th:value="${nextBlock}"> > </button>
+        </li>
+
+        <li>
+            <button name="page" th:value="*{totalPages-1}"> >> </button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

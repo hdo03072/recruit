@@ -22,18 +22,5 @@ public class SearchParam {
 
     private String selectKey2;
 
-    private String searchWorld;
-
-    private Integer listCount;
-
-//
-//    public SearchParam() {
-//        this.startDate = LocalDate.of(LocalDate.now().getYear(), 1, 1);
-//        this.endDate = LocalDate.of(LocalDate.now().getYear(), 12, 31);
-//        this.yearMonth = YearMonth.of(YearMonth.now().getYear(), YearMonth.now().getMonth());
-//        this.selectKey = getSelectKey();
-//        this.selectKey2 = getSelectKey2();
-//        this.searchWorld = getSearchWorld();
-//        this.listCount = getListCount();
-//    }
+    private String searchWord;
 }

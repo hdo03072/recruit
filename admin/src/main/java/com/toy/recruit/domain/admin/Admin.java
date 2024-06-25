@@ -1,26 +1,29 @@
 package com.toy.recruit.domain.admin;
 
+import com.toy.recruit.core.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import static com.toy.recruit.core.code.Constants.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
 @Table(name = "admin")
-public class Admin {
+public class Admin extends BaseEntity {
 
     @Id
-    @Column(length = 200, name = "admin_id")
+    @Column(length = DB_MANY_NUM, name = "admin_id")
     private String adminId;
 
-    @Column(nullable = false, name = "password")
+    @Column(length = DB_MAX_NUM, nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "name")
+    @Column(length = DB_FEW_NUM, nullable = false, name = "name")
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 100, name = "role", nullable = false)
+    @Column(length = DB_MID_NUM, name = "role", nullable = false)
     private Role role;
 }

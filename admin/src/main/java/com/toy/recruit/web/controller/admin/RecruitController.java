@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/recruit")
 @RequiredArgsConstructor
-public class AdminController {
+public class RecruitController {
 
     @GetMapping
     public String main(Model model) {
-        return "admin/dashboard";
+        return "admin/recruit/main";
     }
 }

@@ -2,7 +2,7 @@ package com.toy.recruit.core.config.security;
 
 import com.toy.recruit.domain.admin.Admin;
 import com.toy.recruit.domain.admin.SessionUser;
-import com.toy.recruit.repository.AdminRepository;
+import com.toy.recruit.repository.admin.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
