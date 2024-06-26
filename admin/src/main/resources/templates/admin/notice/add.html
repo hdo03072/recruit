@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block id="css">
+    </th:block>
+
+    <th:block id="script">
+        <script type="text/javascript" th:src="@{/js/notice/notice.js}"></script>
+    </th:block>
+
 </head>
 <body>
-add
+<section>
+    <div>
+        <span>공지 등록</span>
+
+        <form th:object="${noticeDto}">
+            <div>
+                <label>
+                    <span>제목</span>
+                    <input type="text" th:field="*{title}" valid="essential" maxlength="100">
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <span>내용</span>
+                    <textarea th:field="*{content}" editor="editor"></textarea>
+                </label>
+            </div>
+
+            <div>
+                <label>첨부파일</label>
+                <div>
+                    <label for="file_input" class="file_btn">
+                        <input type="file" id="file_input" class="file-input" multiple="multiple" />
+                    </label>
+                    <div class="filenames"></div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+                <button type="button" onclick="pageObj.save()" th:text="#{btn.save}"></button>
+            </div>
+        </form>
+    </div>
+</section>
 </body>
 </html>

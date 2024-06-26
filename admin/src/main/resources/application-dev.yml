@@ -7,9 +7,9 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:mariadb://175.120.75.182:3306/hs?characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
-    username: hs
-    password: hs!@
+    url: jdbc:mariadb://175.120.75.182:3306/samin_emp?characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: samin_emp
+    password: samin_emp!@
     driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:

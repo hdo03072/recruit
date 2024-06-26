@@ -42,7 +42,7 @@ $errors = {
                 globalErrors.forEach(error => {
                     globalErrorsTarget.append(`<span class="modal_error">${error.message}</span>`)
                 });
-            } else {
+            } else {``
                 globalErrors.forEach(error => {
                     alert(error.message);
                 });
@@ -1272,6 +1272,7 @@ $view = {
         }
     },
     add: function () {
+        console.log(domain)
         this.setSearchParam();
         location.href = domain + '/add';
     },

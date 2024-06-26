@@ -6,7 +6,7 @@
     </th:block>
 
     <th:block id="script">
-        <script type="text/javascript" th:src="@{/js/notice/board.js}"></script>
+        <script type="text/javascript" th:src="@{/js/notice/notice.js}"></script>
     </th:block>
 
 </head>
@@ -34,7 +34,7 @@
                 <th th:text="#{table.writer}"></th>
                 <th th:text="#{table.date}"></th>
             </tr>
-            <tr th:each="notice: ${result.content}">
+            <tr th:each="notice: ${result.content}" th:onclick="$view.detail([[${notice.id}]])">
                 <td>
                     <input type="checkbox" th:value="${notice.id}">
                 </td>
@@ -47,7 +47,7 @@
                 <td th:if="${notice.files.size() <= 0}">X</td>
 
                 <td th:text="${notice.admin.name}"></td>
-                <td th:text="${notice.createdAt}"></td>
+                <td th:text="${notice.createdAt.toLocalDate()}"></td>
             </tr>
         </table>
 

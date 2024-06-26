@@ -4,6 +4,7 @@ import com.toy.recruit.domain.admin.Admin;
 import com.toy.recruit.domain.notice.Notice;
 import com.toy.recruit.domain.notice.NoticeFile;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class NoticeDto {
 
     private Long id;
