@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class NoticeSave {
 
-    @NotBlank(message = "asdasd")
+    @NotBlank
     private String title;
 
     @NotBlank
