@@ -1,10 +1,13 @@
 package com.toy.recruit.web.controller.admin;
 
+import com.toy.recruit.core.excpetion.AlertException;
 import com.toy.recruit.core.parameter.SearchParam;
 import com.toy.recruit.core.util.FileUtils;
+import com.toy.recruit.domain._file.UploadFile;
 import com.toy.recruit.domain.notice.NoticeFile;
 import com.toy.recruit.service.notice.NoticeService;
 import com.toy.recruit.web.dto.notice.NoticeDto;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,24 +71,25 @@ public class NoticeController {
     }
 
     @GetMapping("/zip/{noticeId}")
-    public ResponseEntity zip(@PathVariable Long noticeId) throws FileNotFoundException {
+    public void zip(@PathVariable Long noticeId, HttpServletResponse response) throws IOException {
         List<NoticeFile> files = noticeService.findById(noticeId).getFiles();
-        if (files.size() > 0) {
-            throw new FileNotFoundException("파일을 찾을 수 없습니다.");
-        }
+//        if (files.size() <= 0) {
+//            throw new AlertException("파일을 찾을 수 없습니다.");
+//        }
 
-//        files.forEach(file -> {
-//            UploadFile uploadFile = UploadFile.builder()
-//                    .originFileName(file.getOriginFileName())
-//                    .storeFileName(file.getStoreFileName())
-//                    .path(file.getPath())
-//                    .contentType(file.getContentType())
-//                    .extension(file.getExtension())
-//                    .fileSize(file.getFileSize())
-//                    .build();
-//
-//        });
+        List<UploadFile> uploadFiles = new ArrayList<>();
+        files.forEach(file -> {
+            UploadFile uploadFile = UploadFile.builder()
+                    .originFileName(file.getOriginFileName())
+                    .storeFileName(file.getStoreFileName())
+                    .path(file.getPath())
+                    .contentType(file.getContentType())
+                    .extension(file.getExtension())
+                    .fileSize(file.getFileSize())
+                    .build();
+            uploadFiles.add(uploadFile);
+        });
 
-        return null;
+        FileUtils.zipDownload(uploadFiles, response);
     }
 }

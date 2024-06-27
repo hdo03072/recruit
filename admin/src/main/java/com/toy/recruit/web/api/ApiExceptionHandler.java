@@ -4,6 +4,7 @@ import com.toy.recruit.core.excpetion.AlertException;
 import com.toy.recruit.core.excpetion.UnableChangeStatusException;
 import com.toy.recruit.core.parameter.ValidationResponse;
 import com.toy.recruit.core.validator.PasswordValidator;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
 
+import static org.springframework.http.HttpStatus.FAILED_DEPENDENCY;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice
@@ -47,7 +51,16 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(AlertException.class)
-    public ResponseEntity<?> handleException(AlertException e) {
-        return new ResponseEntity<>(e.getMessage(), INTERNAL_SERVER_ERROR);
+    public void handleException(AlertException e, HttpServletResponse response) throws IOException {
+        String msg = e.getMessage();
+
+        response.setContentType("text/html; charset=euc-kr");
+        response.setCharacterEncoding("euc-kr");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert(\""+msg+"\"); return false;<script>");
+        out.flush();
+        out.close();
+
+//        return new ValidationResponse(INTERNAL_SERVER_ERROR.name(), msg);
     }
 }

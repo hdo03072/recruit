@@ -1,6 +1,7 @@
 package com.toy.recruit.core.util;
 
 import com.toy.recruit.domain._file.UploadFile;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -10,13 +11,15 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import static com.toy.recruit.core.util.StrUtils.*;
 
@@ -98,6 +101,46 @@ public class FileUtils {
         return ResponseEntity.ok()
                 .headers(httpHeaders)
                 .body(resource);
+    }
+
+    public static void zipDownload(List<UploadFile> uploadFiles, HttpServletResponse response) throws IOException {
+        response.setContentType("application/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=download.zip");
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        try(ZipOutputStream zos = new ZipOutputStream(response.getOutputStream())) {
+
+            for (UploadFile uploadFile : uploadFiles) {
+                Path path = Path.of(uploadFile.getPath() + "/" + uploadFile.getStoreFileName());
+                try(FileInputStream fis = new FileInputStream(path.toFile())) {
+                    ZipEntry zipEntry = new ZipEntry(uploadFile.getOriginFileName());
+                    zos.putNextEntry(zipEntry);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = fis.read(buffer)) >= 0) {
+                        zos.write(buffer, 0, length);
+                    }
+                } catch (FileNotFoundException e) {
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    throw new IllegalStateException("파일을 찾을 수 없습니다.");
+                } catch (IOException e) {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    throw new IllegalStateException("파일을 다운로드할 수 없습니다.");
+                } finally {
+                    zos.flush();
+                    zos.closeEntry();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                response.flushBuffer();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static boolean createFile(MultipartFile multipartFile, String path, String storeFileName) throws IOException {
