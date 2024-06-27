@@ -32,11 +32,14 @@
 
             <div>
                 <label>첨부파일</label>
-                <a th:href="@{/admin/notice/zip/{id}(id=*{id})}" th:text="#{file.zip}"></a>
+                <a th:if="*{files.size() > 1}" th:href="@{/admin/notice/zip/{id}(id=*{id})}" th:text="#{file.zip}"></a>
                 <div>
                     <div th:each="file : *{files}">
                         <a th:href="@{/admin/notice/download/{fileId}(fileId=${file.id})}" th:text="${file.originFileName}"></a>
                     </div>
+                </div>
+                <div th:if="*{files.size() <= 0}">
+                    <div>파일이 존재하지 않습니다.</div>
                 </div>
             </div>
 

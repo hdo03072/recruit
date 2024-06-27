@@ -1,8 +1,12 @@
 package com.toy.recruit.core.excpetion;
 
 
-public class AlertException extends RuntimeException {
-    public AlertException() {}
+import java.io.IOException;
 
-    public AlertException(String message) {}
+public class AlertException extends Exception {
+    public AlertException() throws IOException {}
+
+    public AlertException(String message) throws IOException {
+        super(message);
+    }
 }

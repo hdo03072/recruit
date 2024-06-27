@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,17 +52,11 @@ public class ApiExceptionHandler {
         return new ValidationResponse(code, message);
     }
 
-    @ExceptionHandler(AlertException.class)
-    public void handleException(AlertException e, HttpServletResponse response) throws IOException {
-        String msg = e.getMessage();
-
-        response.setContentType("text/html; charset=euc-kr");
-        response.setCharacterEncoding("euc-kr");
-        PrintWriter out = response.getWriter();
-        out.println("<script>alert(\""+msg+"\"); return false;<script>");
-        out.flush();
-        out.close();
-
-//        return new ValidationResponse(INTERNAL_SERVER_ERROR.name(), msg);
-    }
+//    @ExceptionHandler(AlertException.class)
+//    public ValidationResponse handleException(AlertException exception, Locale locale) {
+//        String code = exception.getMessage();
+//        String message = messageSource.getMessage(code, null, locale);
+//
+//        return new ValidationResponse(code, message);
+//    }
 }

@@ -71,11 +71,11 @@ public class NoticeController {
     }
 
     @GetMapping("/zip/{noticeId}")
-    public void zip(@PathVariable Long noticeId, HttpServletResponse response) throws IOException {
+    public void zip(@PathVariable Long noticeId, HttpServletResponse response) throws IOException, AlertException {
         List<NoticeFile> files = noticeService.findById(noticeId).getFiles();
-//        if (files.size() <= 0) {
-//            throw new AlertException("파일을 찾을 수 없습니다.");
-//        }
+        if (files.size() <= 0) {
+            throw new AlertException("파일을 찾을 수 없습니다.");
+        }
 
         List<UploadFile> uploadFiles = new ArrayList<>();
         files.forEach(file -> {
