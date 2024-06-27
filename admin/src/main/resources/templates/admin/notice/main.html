@@ -15,6 +15,9 @@
     <div>
         <span>공지 관리</span>
 
+        <!--조건검색 블럭-->
+
+
         <table>
             <colgroup>
                 <col width="5%">
@@ -49,8 +52,12 @@
                 <td th:text="${notice.admin.name}"></td>
                 <td th:text="${notice.createdAt.toLocalDate()}"></td>
             </tr>
+
+            <!--"목록이 없습니다." 블럭-->
+            <tr th:replace="~{util/tableNoneCnt :: tableNoneCnt(${result.content.size()}, 6)}"></tr>
         </table>
 
+        <!--페이징 블럭-->
         <div th:replace="~{util/pagination :: pagination(${result})}"></div>
 
         <div>

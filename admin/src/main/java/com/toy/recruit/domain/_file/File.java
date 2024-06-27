@@ -9,7 +9,7 @@ import lombok.Getter;
 public class File extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(nullable = false)
@@ -17,6 +17,9 @@ public class File extends BaseEntity {
 
     @Column(nullable = false)
     protected String storeFileName;
+
+    @Column(nullable = false)
+    protected String path;
 
     protected String contentType;
 

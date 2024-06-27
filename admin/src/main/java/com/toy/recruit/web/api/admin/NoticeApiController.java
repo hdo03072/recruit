@@ -18,6 +18,7 @@ public class NoticeApiController {
 
     @PostMapping("/add")
     public ResponseEntity save(@Valid NoticeSave noticeSave) {
-        return ResponseEntity.ok().build();
+        Long id = noticeService.save(noticeSave);
+        return ResponseEntity.ok(id);
     }
 }

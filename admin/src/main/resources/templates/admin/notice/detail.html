@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block id="css">
+    </th:block>
+
+    <th:block id="script">
+        <script type="text/javascript" th:src="@{/js/notice/notice.js}"></script>
+    </th:block>
+
+</head>
+<body>
+<section>
+    <div>
+        <span>공지 상세</span>
+
+        <div th:object="${notice}">
+            <div>
+                <label>
+                    <span>제목</span>
+                    <span th:text="*{title}"></span>
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <span>내용</span>
+                    <div th:utext="*{content}"></div>
+                </label>
+            </div>
+
+            <div>
+                <label>첨부파일</label>
+                <a th:href="@{/admin/notice/zip/{id}(id=*{id})}" th:text="#{file.zip}"></a>
+                <div>
+                    <div th:each="file : *{files}">
+                        <a th:href="@{/admin/notice/download/{fileId}(fileId=${file.id})}" th:text="${file.originFileName}"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+                <button type="button" th:onclick="pageObj.delete([[${notice.id}]])" th:text="#{btn.del}"></button>
+                <button type="button" th:onclick="$view.edit([{${notice.id}])" th:text="#{btn.edit}"></button>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
