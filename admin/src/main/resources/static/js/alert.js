@@ -17,10 +17,11 @@ $alert = function () {
     var defaultOptions = {
         height: "400px",
         width: "400px",
-        type: "success",
         button: true,
         timeout: 2000,
         autoClose: true,
+
+        type: "success",
         message: "Successfully!"
     }
 

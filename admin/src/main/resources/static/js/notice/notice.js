@@ -7,7 +7,10 @@ var pageObj = {
 
     save: function () {
         if ($("#content").summernote("isEmpty")) {
-            alert("내용을 입력해 주세요.");
+            al.open({
+                type: "success",
+                message: "내용은 필수값입니다."
+            })
         }
 
         $ajax.postMultiPart({
@@ -53,6 +56,7 @@ var pageObj = {
     }
 }
 
+let al = $alert();
 pageObj.pageStart = function () {
     pageObj.init();
 
