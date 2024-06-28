@@ -246,7 +246,6 @@ $files = {
         }
     },
     addFile: function (file) {
-        console.log("@@@")
         let filename = file.name;
 
         if (this.filesMap[filename]) return;
@@ -486,8 +485,6 @@ $ajax = {
 
     delete: function (options) {
         options = $.extend({}, this.defaultOption, options);
-        console.log(options);
-        console.log(options.data);
         $.ajax({
             url: options.url,
             type: 'DELETE',
@@ -505,7 +502,6 @@ $ajax = {
             if (options.error) {
                 options.error(error.responseJSON);
             } else {
-                console.log(error);
                 $errors.valid(error.responseJSON);
             }
         });
@@ -725,7 +721,6 @@ $view = {
         }
     },
     add: function () {
-        console.log(domain)
         this.setSearchParam();
         location.href = domain + '/add';
     },
@@ -734,6 +729,7 @@ $view = {
         location.href = domain + `/${id}`;
     },
     edit: function (id) {
+        console.log(id)
         location.href = domain + `/${id}/edit`;
     },
 

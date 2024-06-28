@@ -13,17 +13,43 @@ var pageObj = {
         $ajax.postMultiPart({
             data: $form.getData(),
             success: function (id) {
-                $view.detail(id)
+                $view.detail(id);
             }
         })
     },
 
     update: function () {
+        if ($("#content").summernote("isEmpty")) {
+            alert("내용을 입력해 주세요.");
+        }
 
+        $ajax.putMultiPart({
+            data: $form.getData(),
+            success: function (id) {
+                $view.detail(id);
+            }
+        })
     },
 
-    delete: function () {
-
+    delete: function (id) {
+        $ajax.delete({
+            url: "/admin/notice/delete",
+            data: id,
+            success: function () {
+                $view.main();
+            }
+        })
+    },
+    deleteAll: function () {
+        let checked = $checkBox.getAllChecked();
+        if (checked.length <= 0) {
+            alert("삭제할 항목을 선택해 주세요.");
+            return false;
+        }
+        $ajax.delete({
+            url: "/admin/notice/deleteAll",
+            data: checked
+        })
     }
 }
 

@@ -46,7 +46,7 @@
             <div>
                 <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
                 <button type="button" th:onclick="pageObj.delete([[${notice.id}]])" th:text="#{btn.del}"></button>
-                <button type="button" th:onclick="$view.edit([{${notice.id}])" th:text="#{btn.edit}"></button>
+                <button type="button" th:onclick="$view.edit([[${notice.id}]])" th:text="#{btn.edit}"></button>
             </div>
         </div>
     </div>

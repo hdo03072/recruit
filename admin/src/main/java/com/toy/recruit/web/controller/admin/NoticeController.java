@@ -31,7 +31,7 @@ public class NoticeController {
 
     private final NoticeService noticeService;
 
-    @GetMapping
+    @GetMapping({"", "/"})
     public String main(@ModelAttribute SearchParam searchParam, Pageable pageable, Model model) {
         Page<NoticeDto> result = noticeService.findAll(searchParam, pageable);
         model.addAttribute("result", result);
@@ -51,7 +51,7 @@ public class NoticeController {
         return "admin/notice/add";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
         NoticeDto notice = noticeService.getNotice(id);
         model.addAttribute("notice", notice);

@@ -38,7 +38,7 @@
                 <th th:text="#{table.date}"></th>
             </tr>
             <tr th:each="notice: ${result.content}" th:onclick="$view.detail([[${notice.id}]])">
-                <td>
+                <td onclick="event.cancelBubble=true">
                     <input type="checkbox" th:value="${notice.id}">
                 </td>
                 <td>
@@ -46,7 +46,7 @@
                 </td>
                 <td th:text="${notice.title}"></td>
 
-                <td th:if="${notice.files.size() > 0}"O</td>
+                <td th:if="${notice.files.size() > 0}">O</td>
                 <td th:if="${notice.files.size() <= 0}">X</td>
 
                 <td th:text="${notice.admin.name}"></td>
@@ -61,7 +61,7 @@
         <div th:replace="~{util/pagination :: pagination(${result})}"></div>
 
         <div>
-            <button type="button" onclick="pageObj.delete()" th:text="#{btn.sel.del}"></button>
+            <button type="button" onclick="pageObj.deleteAll()" th:text="#{btn.sel.del}"></button>
             <button type="button" onclick="$view.add()" th:text="#{btn.add}"></button>
         </div>
     </div>

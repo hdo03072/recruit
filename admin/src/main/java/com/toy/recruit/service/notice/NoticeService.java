@@ -1,6 +1,7 @@
 package com.toy.recruit.service.notice;
 
 import com.toy.recruit.core.parameter.SearchParam;
+import com.toy.recruit.core.util.FileUtils;
 import com.toy.recruit.domain._file.UploadFile;
 import com.toy.recruit.domain.admin.Admin;
 import com.toy.recruit.domain.notice.Notice;
@@ -10,6 +11,7 @@ import com.toy.recruit.repository.notice.NoticeRepository;
 import com.toy.recruit.service.admin.AdminService;
 import com.toy.recruit.web.dto.notice.NoticeDto;
 import com.toy.recruit.web.dto.notice.NoticeSave;
+import com.toy.recruit.web.dto.notice.NoticeUpdate;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -79,10 +81,29 @@ public class NoticeService {
     }
 
     /*수정*/
+    @Transactional
+    public Long update(Long id, NoticeUpdate data) {
+        Notice notice = findById(id);
+        notice.update(data);
+        return id;
+    }
 
     /*선택 삭제*/
+    @Transactional
+    public void deleteAll(List<Long> ids) {
+        ids.forEach(this::delete);
+    }
 
     /*삭제*/
+    @Transactional
+    public void delete(Long id) {
+        // 서버에 존재하는 파일 삭제
+        Notice notice = findById(id);
+        deleteFile(notice.getFiles());
+
+        // db에서 삭제
+        noticeRepository.deleteById(id);
+    }
 
     /*단일 파일 변환 MultiPartFile -> uploadFile*/
     private UploadFile newFile(MultipartFile file) throws IOException {
@@ -93,6 +114,13 @@ public class NoticeService {
     private List<UploadFile> newFileList(List<MultipartFile> files) {
         // notice: 파일 디렉토리 명
         return uploadFiles(files, "notice");
+    }
+
+    /*서버 파일 삭제*/
+    private void deleteFile(List<NoticeFile> files) {
+        if (files.size() > 0) {
+            files.forEach(file -> FileUtils.deleteFile(file.getPath(), file.getStoreFileName()));
+        }
     }
 
     /*기타*/

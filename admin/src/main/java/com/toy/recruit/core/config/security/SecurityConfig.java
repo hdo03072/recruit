@@ -37,7 +37,7 @@ public class SecurityConfig {
         return
                 http
                         .csrf(AbstractHttpConfigurer::disable)
-                        .cors(AbstractHttpConfigurer::disable)
+//                        .cors(AbstractHttpConfigurer::disable)
 
                         .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                                 .requestMatchers(("/admin/**")).authenticated()
