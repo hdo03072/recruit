@@ -74,7 +74,7 @@ public class NoticeController {
     public void zip(@PathVariable Long noticeId, HttpServletResponse response) throws IOException, AlertException {
         List<NoticeFile> files = noticeService.findById(noticeId).getFiles();
         if (files.size() <= 0) {
-            throw new AlertException("파일을 찾을 수 없습니다.");
+            throw new AlertException("압축할 파일이 존재하지 않습니다.");
         }
 
         List<UploadFile> uploadFiles = new ArrayList<>();
