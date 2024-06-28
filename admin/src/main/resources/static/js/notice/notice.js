@@ -55,4 +55,16 @@ var pageObj = {
 
 pageObj.pageStart = function () {
     pageObj.init();
+
+    // 알림 모달 예시
+    // let al = $alert();
+    // al.open({
+    //     height: "400px",
+    //     width: "400px",
+    //     button: true,
+    //     timeout: 2000,
+    //     autoClose: true,
+    //     type: "success",
+    //     message: "안녕하세요~~"
+    // })
 }

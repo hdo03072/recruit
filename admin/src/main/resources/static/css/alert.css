@@ -1,0 +1,4 @@
+.alert_modal {
+    position: fixed;
+    z-index: 999;
+}
