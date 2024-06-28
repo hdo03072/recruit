@@ -7,7 +7,7 @@
     <ul th:with="blockSize=10, number = *{number}, totalPages = *{totalPages},
                 start=${T(java.lang.Math).floor(number/blockSize)*blockSize + 1},
                 end=(${totalPages==0? 1 : start + 9 < totalPages ? start + 9 : totalPages}),
-                prevBlock=${(number/blockSize*blockSize)-blockSize > 0 ? (number/blockSize*blockSize)-blockSize+9 : 9},
+                prevBlock=${(number/blockSize*blockSize)-blockSize > 0 ? (number/blockSize*blockSize)-blockSize+9 : 0},
                 nextBlock=${(number/blockSize*blockSize)+blockSize < totalPages ? (number/blockSize*blockSize)+blockSize : totalPages-1}">
 
         <li>

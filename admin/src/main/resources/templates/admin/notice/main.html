@@ -13,57 +13,59 @@
 <body>
 <section>
     <div>
-        <span>공지 관리</span>
+        <form th:action>
+            <span>공지 관리</span>
 
-        <!--조건검색 블럭-->
+            <!--조건검색 블럭-->
 
 
-        <table>
-            <colgroup>
-                <col width="5%">
-                <col width="5%">
-                <col width="60%">
-                <col width="10%">
-                <col width="10%">
-                <col width="10%">
-            </colgroup>
-            <tr>
-                <th>
-                    <input type="checkbox" check="all">
-                </th>
-                <th th:text="#{table.no}"></th>
-                <th th:text="#{table.title}"></th>
-                <th th:text="#{table.file}"></th>
-                <th th:text="#{table.writer}"></th>
-                <th th:text="#{table.date}"></th>
-            </tr>
-            <tr th:each="notice: ${result.content}" th:onclick="$view.detail([[${notice.id}]])">
-                <td onclick="event.cancelBubble=true">
-                    <input type="checkbox" th:value="${notice.id}">
-                </td>
-                <td>
-                    <span th:replace="~{util/tableNum :: tableNum(${noticeStat.index})}"></span>
-                </td>
-                <td th:text="${notice.title}"></td>
+            <table>
+                <colgroup>
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="60%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <tr>
+                    <th>
+                        <input type="checkbox" check="all">
+                    </th>
+                    <th th:text="#{table.no}"></th>
+                    <th th:text="#{table.title}"></th>
+                    <th th:text="#{table.file}"></th>
+                    <th th:text="#{table.writer}"></th>
+                    <th th:text="#{table.date}"></th>
+                </tr>
+                <tr th:each="notice: ${result.content}" th:onclick="$view.detail([[${notice.id}]])">
+                    <td onclick="event.cancelBubble=true">
+                        <input type="checkbox" th:value="${notice.id}">
+                    </td>
+                    <td>
+                        <span th:replace="~{util/tableNum :: tableNum(${noticeStat.index})}"></span>
+                    </td>
+                    <td th:text="${notice.title}"></td>
 
-                <td th:if="${notice.files.size() > 0}">O</td>
-                <td th:if="${notice.files.size() <= 0}">X</td>
+                    <td th:if="${notice.files.size() > 0}">O</td>
+                    <td th:if="${notice.files.size() <= 0}">X</td>
 
-                <td th:text="${notice.admin.name}"></td>
-                <td th:text="${notice.createdAt.toLocalDate()}"></td>
-            </tr>
+                    <td th:text="${notice.admin.name}"></td>
+                    <td th:text="${notice.createdAt.toLocalDate()}"></td>
+                </tr>
 
-            <!--"목록이 없습니다." 블럭-->
-            <tr th:replace="~{util/tableNoneCnt :: tableNoneCnt(${result.content.size()}, 6)}"></tr>
-        </table>
+                <!--"목록이 없습니다." 블럭-->
+                <tr th:replace="~{util/tableNoneCnt :: tableNoneCnt(${result.content.size()}, 6)}"></tr>
+            </table>
 
-        <!--페이징 블럭-->
-        <div th:replace="~{util/pagination :: pagination(${result})}"></div>
+            <!--페이징 블럭-->
+            <div th:replace="~{util/pagination :: pagination(${result})}"></div>
 
-        <div>
-            <button type="button" onclick="pageObj.deleteAll()" th:text="#{btn.sel.del}"></button>
-            <button type="button" onclick="$view.add()" th:text="#{btn.add}"></button>
-        </div>
+            <div>
+                <button type="button" onclick="pageObj.deleteAll()" th:text="#{btn.sel.del}"></button>
+                <button type="button" onclick="$view.add()" th:text="#{btn.add}"></button>
+            </div>
+        </form>
     </div>
 </section>
 </body>
