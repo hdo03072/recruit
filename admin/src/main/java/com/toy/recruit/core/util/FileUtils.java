@@ -112,7 +112,9 @@ public class FileUtils {
 
             for (UploadFile uploadFile : uploadFiles) {
                 Path path = Path.of(uploadFile.getPath() + "/" + uploadFile.getStoreFileName());
+
                 try(FileInputStream fis = new FileInputStream(path.toFile())) {
+
                     ZipEntry zipEntry = new ZipEntry(uploadFile.getOriginFileName());
                     zos.putNextEntry(zipEntry);
                     byte[] buffer = new byte[1024];
@@ -120,6 +122,7 @@ public class FileUtils {
                     while ((length = fis.read(buffer)) >= 0) {
                         zos.write(buffer, 0, length);
                     }
+
                 } catch (FileNotFoundException e) {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     throw new IllegalStateException("파일을 찾을 수 없습니다.");
