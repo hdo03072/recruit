@@ -526,7 +526,10 @@ $valid = {
     },
     deletes: function (selectCondition) {
         if (!selectCondition) {
-            alert("삭제할 항목을 선택해 주세요.");
+            al.open({
+                type: "warning",
+                message: "삭제할 항목을 선택해 주세요."
+            })
         } else {
             return confirm("선택된 항목을 삭제 하시겠습니까?")
         }

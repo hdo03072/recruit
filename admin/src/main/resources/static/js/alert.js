@@ -23,7 +23,7 @@ $alert = function () {
 
         type: "success",
         message: "Successfully!"
-    }
+    };
 
     var open = function (options) {
         defaultOptions = $.extend({}, defaultOptions, options);
@@ -105,7 +105,7 @@ $alert = function () {
             let btn =
                 `
                 <div class="alert_btn_div">
-                    <button type="button" onclick="$alert.close()">닫기</button>
+                    <button type="button" onclick="al.close()">닫기</button>
                 </div>
                 `;
             $(main).append(btn);
@@ -123,5 +123,67 @@ $alert = function () {
 }
 
 $confirm = function () {
+    var cnf;
 
+    var defaultOptions = {
+        height: "400px",
+        width: "400px",
+        message: "진행하시겠습니까?"
+    };
+
+    var open = function (options) {
+        defaultOptions = $.extend({}, defaultOptions, options);
+        let confirmCode = this.confirmCode(defaultOptions);
+        $(".container").append(confirmCode);
+        setStyle(defaultOptions);
+    }
+
+    var close = function () {
+        $("#confirm_modal").remove();
+    }
+
+    var setStyle = function (options) {
+        let height = options.height;
+        let width = options.width;
+        $("#confirm_modal").css({height: height, width: width});
+    }
+
+    var getData = function () {
+        return cnf;
+    }
+
+    var setData = function (value) {
+        cnf = value;
+        this.close();
+    }
+
+    var confirmCode = function (options) {
+        let msg = options.message;
+        return `
+                <div id="confirm_modal" class="confirm_modal">
+                    <div class="confirm_img_div">
+                        <img src="/image/confirm/configm.jpg" alt="대화 모달 이미지">
+                    </div>
+                    <div class="confirm_main_div">
+                        <span>${msg}</span>
+                    </div>
+                    <div class="confirm_btn_div">
+                    <button type="button" onclick="conf.setData(true)">예</button>
+                    <button type="button" onclick="conf.setData(false)">아니오</button>
+                </div>
+                </div>
+            `;
+    }
+
+    return {
+        "open": open,
+        "close": close,
+        "setStyle": setStyle,
+        "getData": getData,
+        "setData": setData,
+        "confirmCode": confirmCode
+    }
 }
+
+let al = $alert();
+let conf = $confirm();

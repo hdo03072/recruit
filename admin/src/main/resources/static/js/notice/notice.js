@@ -8,7 +8,7 @@ var pageObj = {
     save: function () {
         if ($("#content").summernote("isEmpty")) {
             al.open({
-                type: "success",
+                type: "warning",
                 message: "내용은 필수값입니다."
             })
         }
@@ -23,7 +23,10 @@ var pageObj = {
 
     update: function () {
         if ($("#content").summernote("isEmpty")) {
-            alert("내용을 입력해 주세요.");
+            al.open({
+                type: "warning",
+                message: "내용은 필수값입니다."
+            })
         }
 
         $ajax.putMultiPart({
@@ -35,18 +38,23 @@ var pageObj = {
     },
 
     delete: function (id) {
-        $ajax.delete({
-            url: "/admin/notice/delete",
-            data: id,
-            success: function () {
-                $view.main();
-            }
-        })
+        console.log($valid.delete())
+
+        // $ajax.delete({
+        //     url: "/admin/notice/delete",
+        //     data: id,
+        //     success: function () {
+        //         $view.main();
+        //     }
+        // })
     },
     deleteAll: function () {
         let checked = $checkBox.getAllChecked();
         if (checked.length <= 0) {
-            alert("삭제할 항목을 선택해 주세요.");
+            al.open({
+                type: "warning",
+                message: "삭제할 항목을 선택해 주세요."
+            })
             return false;
         }
         $ajax.delete({
@@ -56,19 +64,6 @@ var pageObj = {
     }
 }
 
-let al = $alert();
 pageObj.pageStart = function () {
     pageObj.init();
-
-    // 알림 모달 예시
-    // let al = $alert();
-    // al.open({
-    //     height: "400px",
-    //     width: "400px",
-    //     button: true,
-    //     timeout: 2000,
-    //     autoClose: true,
-    //     type: "success",
-    //     message: "안녕하세요~~"
-    // })
 }
