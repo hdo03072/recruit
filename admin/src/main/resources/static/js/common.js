@@ -254,7 +254,7 @@ $files = {
         const template = `
                     <div class="file_wraper">
                         <span>${filename}</span>
-                        <button type="button" onclick="$files.removeFile(this)"><img src="${$url.getHostUrl()}/images/common/close.svg"></button>
+                        <button class="btn-txt small secondary ico-l" type="button" onclick="$files.removeFile(this)"><img src="/image/common/cross_gray_ico.svg">삭제</button>
                     </div>`;
 
         $(".filenames").append(template);
@@ -278,7 +278,7 @@ $files = {
         const template = `
                     <div class="file_wraper">
                         <span>${filename}</span>
-                        <button type="button" onclick="$files.removeFile(this)"><img src="${$url.getHostUrl()}/images/common/close.svg"></button>
+                        <button class="btn-txt small secondary ico-l" type="button" onclick="$files.removeFile(this)"><img src="/image/common/cross_gray_ico.svg">삭제</button>
                     </div>`;
 
         inputClass.append(template);

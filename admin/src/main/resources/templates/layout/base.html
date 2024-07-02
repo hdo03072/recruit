@@ -11,9 +11,8 @@
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css}">
     <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css}">
 
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">-->
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">-->
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}">
 
     <link href="#" rel="icon">
 
@@ -41,9 +40,9 @@
 <body>
     <div class="wrap">
         <!-- 사이드바 할거면 사이드바로 하면되고 헤더로 할거면 헤더로 하면 됩니다. 그건 소은씨 자유-->
-        <nav th:insert="~{layout/sidebar :: navigation}"></nav>
+        <nav class="nav" th:insert="~{layout/sidebar :: navigation}"></nav>
 
-        <div th:insert="${content}" class="container"></div>
+        <main class="main-container" th:insert="${content}"></main>
     </div>
 </body>
 </html>

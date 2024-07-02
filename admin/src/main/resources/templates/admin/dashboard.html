@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::.inner})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block id="css">
@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<section>
+<div class="inner">
     <div>
         <span>대시보드</span>
 
@@ -36,6 +36,6 @@
             </ul>
         </div>
     </div>
-</section>
+</div>
 </body>
 </html>

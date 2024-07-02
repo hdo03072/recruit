@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::.inner})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block id="css">
@@ -11,47 +11,40 @@
 
 </head>
 <body>
-<section>
-    <div>
-        <span>공지 수정</span>
+<div class="inner">
+    <h2 class="page-tit">공지 수정</h2>
 
-        <form th:object="${notice}">
-            <div>
-                <label>
-                    <span>제목</span>
-                    <input type="text" th:field="*{title}" valid="essential" maxlength="100">
-                </label>
+    <form th:object="${notice}">
+        <div class="page-container">
+            <div class="form-tit">
+                <span class="label-txt essential">제목</span>
+                <input type="text" th:field="*{title}" valid="essential" maxlength="100" placeholder="제목을 입력해 주세요">
             </div>
+        </div>
 
+        <textarea th:field="*{content}" editor="editor"></textarea>
+
+        <div>
+            <label>첨부파일</label>
             <div>
-                <label>
-                    <span>내용</span>
-                    <textarea th:field="*{content}" editor="editor"></textarea>
+                <label for="file_input" class="file_btn">
+                    <input type="file" id="file_input" class="file-input" multiple="multiple" />
                 </label>
-            </div>
-
-            <div>
-                <label>첨부파일</label>
-                <div>
-                    <label for="file_input" class="file_btn">
-                        <input type="file" id="file_input" class="file-input" multiple="multiple" />
-                    </label>
-                    <div class="filenames">
-                        <div class="file_wraper" th:each="file : ${notice.files}">
-                            <input type="hidden" name="savedFileIds" th:value="${file.id}" />
-                            <span th:text="${file.originFileName}"></span>
-                            <button type="button" onclick="$files.removeFile(this)"><img th:src="@{/images/common/close.svg}"></button>
-                        </div>
+                <div class="filenames">
+                    <div class="file_wraper" th:each="file : ${notice.files}">
+                        <input type="hidden" name="savedFileIds" th:value="${file.id}" />
+                        <span th:text="${file.originFileName}"></span>
+                        <button type="button" onclick="$files.removeFile(this)"><img th:src="@{/images/common/close.svg}"></button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div>
-                <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
-                <button type="button" onclick="pageObj.update()" th:text="#{btn.save}"></button>
-            </div>
-        </form>
-    </div>
-</section>
+        <div>
+            <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+            <button type="button" onclick="pageObj.update()" th:text="#{btn.save}"></button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

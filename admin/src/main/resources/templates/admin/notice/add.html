@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::.inner})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block id="css">
@@ -11,41 +11,35 @@
 
 </head>
 <body>
-<section>
-    <div>
-        <span>공지 등록</span>
+<div class="inner">
+    <h2 class="page-tit">공지 등록</h2>
 
-        <form th:object="${noticeDto}">
-            <div>
-                <label>
-                    <span>제목</span>
-                    <input type="text" th:field="*{title}" valid="essential" maxlength="100">
-                </label>
+    <form th:object="${noticeDto}">
+        <div class="page-container">
+            <div class="form-tit">
+                <span class="label-txt essential">제목</span>
+                <input type="text" th:field="*{title}" valid="essential" maxlength="100" placeholder="제목을 입력해 주세요">
             </div>
 
-            <div>
-                <label>
-                    <span>내용</span>
-                    <textarea th:field="*{content}" editor="editor"></textarea>
-                </label>
-            </div>
+            <textarea th:field="*{content}" editor="editor"></textarea>
 
-            <div>
-                <label>첨부파일</label>
-                <div>
-                    <label for="file_input" class="file_btn">
+            <div class="form-file">
+                <span class="label-txt">첨부파일</span>
+                <div class="file-upload">
+                    <input type="text" placeholder="첨부파일을 선택해 주세요" disabled>
+                    <label for="file_input" class="upload-btn btn medium solid-assistive">
+                        파일찾기
                         <input type="file" id="file_input" class="file-input" multiple="multiple" />
                     </label>
                     <div class="filenames"></div>
                 </div>
             </div>
-
-            <div>
-                <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
-                <button type="button" onclick="pageObj.save()" th:text="#{btn.save}"></button>
-            </div>
-        </form>
-    </div>
-</section>
+        </div>
+        <div class="page-bottom">
+            <button class="btn large outline-assistive" type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+            <button class="btn large solid-primary" type="button" onclick="pageObj.save()" th:text="#{btn.save}"></button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

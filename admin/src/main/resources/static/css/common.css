@@ -1,1 +1,424 @@
-/*여기에 공통 css 하면 됩니다*/
+:root {
+  --color-primary: #306AFF;
+  --bg-primary-normal: #E3EBFF;
+  --bg-primary-light: #F1F5FF;
+  --bg-gray-strong: #DBDFE8;
+  --bg-gray-normal: #E8EDF0;
+  --bg-gray-light: #F1F5F8;
+  --bg-disabled: #F8F8F8;
+  --label-normal: #1E2634;
+  --label-neutral: #343A44;
+  --label-alternative: #565F71;
+  --label-assistive: #767B86;
+  --label-disabled: #A8AEB9;
+  --border-strong: #B6BDCA;
+  --border-normal: #DBDFE5;
+  --border-light: #E3E7EE;
+  --color-red-normal: #FF5F5F;
+  --color-red-light: #FFE7E7;
+  --color-green-normal: #01BA61;
+  --color-green-light: #DDF9EB;
+  --nav-width: 280px;
+}
+
+.wrap {
+  width: 100%;
+  background: var(--bg-gray-light);
+  color: var(--label-normal);
+}
+
+.nav {
+  position: fixed;
+  width: var(--nav-width);
+  height: 100%;
+  padding: 16px 18px;
+  top: 0;
+  left: 0;
+  background: #1B1B1B;
+}
+
+.nav-top {
+  margin-bottom: 32px;
+}
+
+.nav-top__logo {
+  width: 244px;
+  height: 46px;
+  background: #fff;
+  opacity: 0.3;
+}
+
+.nav-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px 20px 20px;
+  font-weight: 500;
+  color: #fff;
+}
+.nav-menu li a img {
+  width: 20px;
+  height: 20px;
+}
+
+.main-container {
+  min-height: 100vh;
+  margin-left: var(--nav-width);
+}
+.main-container .inner {
+  min-height: calc(100vh - 108px);
+  padding: 56px 110px 52px;
+}
+
+.page-tit {
+  margin-bottom: 26px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.page-container {
+  padding: 24px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.page-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+table thead th {
+  padding: 12px 16px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  background: var(--bg-gray-light);
+  color: var(--label-alternative);
+}
+table thead th:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+table thead th:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+table thead th input[type=checkbox] {
+  margin: -6px 0;
+}
+table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+}
+table tbody tr.empty td {
+  position: relative;
+  padding: 96px 16px 40px;
+  font-weight: 500;
+  color: var(--label-disabled);
+}
+table tbody tr.empty td::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%);
+  background: url(../image/common/empty_ico.svg) center/cover no-repeat;
+}
+table tbody td {
+  padding: 18px 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+table tbody td.txt-overflow {
+  text-align: left;
+}
+table tbody td.txt-overflow > div {
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+table tbody td input[type=checkbox] {
+  margin: -6px 0;
+}
+table tbody td img {
+  margin: 0 auto;
+}
+
+.tbl-util {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pagination {
+  margin-top: 32px;
+}
+.pagination ul {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+.pagination ul button {
+  display: block;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 4px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--label-assistive);
+  border-radius: 6px;
+}
+.pagination ul button img {
+  margin: 0 auto;
+}
+.pagination ul button.active {
+  font-weight: 500;
+  background: var(--bg-primary-normal);
+  color: var(--color-primary);
+}
+
+input[type=checkbox] {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--border-normal);
+  border-radius: 6px;
+  background: url(../image/common/check_gray_ico.svg) center/20px 20px no-repeat, #fff;
+  cursor: pointer;
+}
+input[type=checkbox]:checked {
+  border: 1px solid transparent;
+  background: url(../image/common/check_white_ico.svg) center/20px 20px no-repeat, var(--color-primary);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn.solid-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn.solid-secondary {
+  background: var(--bg-primary-normal);
+  color: var(--color-primary);
+}
+.btn.solid-assistive {
+  background: #2C2C2C;
+  color: #fff;
+}
+.btn.outline-primary {
+  border: 1px solid var(--color-primary);
+  background: #fff;
+  color: var(--color-primary);
+}
+.btn.outline-secondary {
+  border: 1px solid var(--border-normal);
+  background: #fff;
+  color: var(--color-primary);
+}
+.btn.outline-assistive {
+  border: 1px solid var(--border-normal);
+  background: #fff;
+  color: var(--label-alternative);
+}
+.btn.outline-warning {
+  border: 1px solid var(--border-normal);
+  background: #fff;
+  color: var(--color-red-normal);
+}
+.btn.small {
+  min-width: 56px;
+  height: 36px;
+  padding: 0 12px;
+  line-height: 36px;
+  font-size: 14px;
+}
+.btn.small img {
+  width: 16px;
+  height: 16px;
+}
+.btn.small span {
+  font-size: 14px;
+}
+.btn.medium {
+  min-width: 64px;
+  height: 42px;
+  padding: 0 16px;
+  line-height: 42px;
+  font-size: 15px;
+}
+.btn.medium img {
+  width: 16px;
+  height: 16px;
+}
+.btn.medium span {
+  font-size: 15px;
+}
+.btn.large {
+  min-width: 72px;
+  height: 48px;
+  padding: 0 20px;
+  line-height: 48px;
+  font-size: 15px;
+}
+.btn.large img {
+  width: 16px;
+  height: 16px;
+}
+.btn.large span {
+  font-size: 15px;
+}
+.btn.ico-l img {
+  margin-left: -2px;
+}
+.btn.ico-r img {
+  margin-right: -2px;
+}
+
+.btn-txt {
+  display: flex;
+  gap: 2px;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: background-color ease 0.2s;
+}
+.btn-txt.small {
+  padding: 3px 5px;
+  font-size: 15px;
+}
+.btn-txt.large {
+  padding: 4px 6px;
+  font-size: 16px;
+}
+.btn-txt.primary {
+  color: var(--color-primary);
+}
+.btn-txt.primary:hover {
+  background: var(--bg-primary-normal);
+}
+.btn-txt.secondary {
+  color: var(--label-alternative);
+}
+.btn-txt.secondary:hover {
+  background: var(--bg-gray-normal);
+}
+.btn-txt.ico-l img {
+  margin-left: -2px;
+}
+.btn-txt.ico-r img {
+  margin-right: -2px;
+}
+
+.btn-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.label-txt {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label-neutral);
+}
+.label-txt.essential {
+  position: relative;
+}
+.label-txt.essential::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 0;
+  right: -8px;
+  border-radius: 50%;
+  background: var(--color-red-normal);
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=date] {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--border-normal);
+  border-radius: 6px;
+  background: #fff;
+}
+input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder, input[type=number]::placeholder, input[type=date]::placeholder {
+  font-size: 15px;
+  color: var(--label-disabled);
+}
+input[type=text]:disabled, input[type=text]:read-only, input[type=password]:disabled, input[type=password]:read-only, input[type=email]:disabled, input[type=email]:read-only, input[type=number]:disabled, input[type=number]:read-only, input[type=date]:disabled, input[type=date]:read-only {
+  background: var(--bg-disabled);
+  color: var(--label-assistive);
+}
+
+.note-frame {
+  margin-bottom: 16px;
+  border: 1px solid var(--border-normal);
+  border-radius: 6px;
+}
+
+.form-tit {
+  margin-bottom: 16px;
+}
+
+.file-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.file-upload input[type=text] {
+  width: calc(100% - 94px);
+}
+.file-upload .upload-btn {
+  width: 88px;
+  padding: 0;
+}
+.file-upload .upload-btn input[type=file] {
+  display: none;
+}
+
+.filenames {
+  width: 100%;
+}
+.filenames .file_wraper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-weight: 500;
+  border: 1px solid var(--border-normal);
+  border-radius: 6px;
+  color: var(--label-neutral);
+}
+.filenames .file_wraper:not(:last-of-type) {
+  margin-bottom: 4px;
+}
+.filenames .file_wraper span {
+  width: calc(100% - 68px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=common.css.map */

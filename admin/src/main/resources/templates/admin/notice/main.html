@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::.inner})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block id="css">
@@ -11,23 +11,27 @@
 
 </head>
 <body>
-<section>
-    <div>
-        <form th:action>
-            <span>공지 관리</span>
+<div class="inner">
+    <form th:action>
+        <h2 class="page-tit">공지 관리</h2>
 
-            <!--조건검색 블럭-->
-
+        <!--조건검색 블럭-->
+        <div class="page-container">
+            <div class="tbl-util">
+                <button class="btn outline-assistive small ico-l" type="button" onclick="pageObj.deleteAll()"><img src="/image/common/delete_gray_ico.svg" alt=""><span th:text="#{btn.sel.del}"></span></button>
+                <button class="btn solid-primary small ico-l" type="button" onclick="$view.add()"><img src="/image/common/add_white_ico.svg" alt=""><span th:text="#{btn.add}"></span></button>
+            </div>
 
             <table>
                 <colgroup>
                     <col width="5%">
+                    <col width="8%">
+                    <col width="*">
                     <col width="5%">
-                    <col width="60%">
-                    <col width="10%">
-                    <col width="10%">
+                    <col width="8%">
                     <col width="10%">
                 </colgroup>
+                <thead>
                 <tr>
                     <th>
                         <input type="checkbox" check="all">
@@ -38,6 +42,7 @@
                     <th th:text="#{table.writer}"></th>
                     <th th:text="#{table.date}"></th>
                 </tr>
+                </thead>
                 <tr th:each="notice: ${result.content}" th:onclick="$view.detail([[${notice.id}]])">
                     <td onclick="event.cancelBubble=true">
                         <input type="checkbox" th:value="${notice.id}">
@@ -45,10 +50,10 @@
                     <td>
                         <span th:replace="~{util/tableNum :: tableNum(${noticeStat.index})}"></span>
                     </td>
-                    <td th:text="${notice.title}"></td>
+                    <td class="txt-overflow"><div th:text="${notice.title}"></div></td>
 
-                    <td th:if="${notice.files.size() > 0}">O</td>
-                    <td th:if="${notice.files.size() <= 0}">X</td>
+                    <td th:if="${notice.files.size() > 0}"><img src="/image/common/file_gray_ico.svg" alt=""></td>
+                    <td th:if="${notice.files.size() <= 0}">-</td>
 
                     <td th:text="${notice.admin.name}"></td>
                     <td th:text="${notice.createdAt.toLocalDate()}"></td>
@@ -57,16 +62,10 @@
                 <!--"목록이 없습니다." 블럭-->
                 <tr th:replace="~{util/tableNoneCnt :: tableNoneCnt(${result.content.size()}, 6)}"></tr>
             </table>
-
             <!--페이징 블럭-->
             <div th:replace="~{util/pagination :: pagination(${result})}"></div>
-
-            <div>
-                <button type="button" onclick="pageObj.deleteAll()" th:text="#{btn.sel.del}"></button>
-                <button type="button" onclick="$view.add()" th:text="#{btn.add}"></button>
-            </div>
-        </form>
-    </div>
-</section>
+        </div>
+    </form>
+</div>
 </body>
 </html>
