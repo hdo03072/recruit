@@ -181,7 +181,7 @@ $editor = {
                     img.append("file", file[0]);
 
                     $ajax.postMultiPart({
-                        url: "/files/edit/upload",
+                        url: "/files/editor",
                         data: img,
                         success: function (imgUrl) {
                             target.summernote('insertImage', imgUrl);

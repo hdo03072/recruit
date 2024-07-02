@@ -76,6 +76,30 @@ public class FileUtils {
         return uploadFiles;
     }
 
+    public static UploadFile uploadEditorFile(MultipartFile file) throws IOException {
+        if (file == null) return null;
+
+        String originFileName = file.getOriginalFilename();
+        String storeFileName = createStoreFileName(originFileName);
+        String path = listToString(List.of(fileDir, "editor"));
+        String contentType = file.getContentType();
+        String extension = extractExt(originFileName);
+        Long fileSize = file.getSize();
+
+        if (createFile(file, path, storeFileName)) {
+            return UploadFile.builder()
+                    .originFileName(originFileName)
+                    .storeFileName(storeFileName)
+                    .path(path)
+                    .contentType(contentType)
+                    .extension(extension)
+                    .fileSize(fileSize)
+                    .build();
+        }
+
+        return null;
+    }
+
     public static void deleteFile(String pathName, String fileName) {
         if (!StringUtils.hasLength(pathName)) return;
         if (!StringUtils.hasLength(fileName)) return;
@@ -143,6 +167,16 @@ public class FileUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static String getFullPath(String path, String fileName) {
+        if (!StringUtils.hasLength(fileName)) return null;
+
+        if (StringUtils.hasLength(path)) {
+            return listToString(List.of(path, fileName));
+        } else {
+            return listToString(List.of(fileDir, "editor", fileName));
         }
     }
 
