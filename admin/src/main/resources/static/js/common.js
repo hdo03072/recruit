@@ -491,13 +491,18 @@ $ajax = {
             data: JSON.stringify(options.data),
             contentType: options.contentType,
         }).done(function (data) {
-            alert("삭제 되었습니다.");
-
-            if (options.success) {
-                options.success(data);
-            } else {
-                $url.redirect();
-            }
+            Swal.fire({
+                title: "삭제되었습니다.",
+                icon: "warning"
+            }).then(result => {
+                if (result.isConfirmed) {
+                    if (options.success) {
+                        options.success(data);
+                    } else {
+                        $url.redirect();
+                    }
+                }
+            })
         }).fail(function (error) {
             if (options.error) {
                 options.error(error.responseJSON);
@@ -738,6 +743,59 @@ $view = {
 
     setSearchParam: function () {
         localStorage.setItem("queryString", new URLSearchParams(location.search).toString());
+    }
+}
+
+$swal = {
+    save: function (fn) {
+        Swal.fire({
+            icon: 'info',
+            title: '저장이 완료되었습니다.'
+
+        }).then(function () {
+           fn();
+        })
+    },
+    delete: function (fn) {
+        Swal.fire({
+            icon: "warning",
+            title: '삭제하시겠습니까?',
+            showCancelButton: true,
+            confirmButtonText: '예',
+            cancelButtonText: '아니오',
+            confirmButtonColor: '#429f50',
+            cancelButtonColor: '#d33'
+        }).then(result => {
+            if (result.isConfirmed) {
+                fn();
+            } else {
+                return false;
+            }
+        })
+    },
+    confirm: function () {
+        Swal.fire({
+            icon: options.icon,
+            title: options.title,
+            showCancelButton: true,
+            confirmButtonText: options.confirmButtonText,
+            cancelButtonText: options.cancelButtonText,
+            confirmButtonColor: '#429f50',
+            cancelButtonColor: '#d33'
+        }).then(result => {
+            if (result.isConfirmed) {
+                fn();
+            } else {
+                return false;
+            }
+        })
+    },
+    etc: function (options) {
+        Swal.fire({
+            icon: options.icon,
+            title: options.title
+
+        })
     }
 }
 
