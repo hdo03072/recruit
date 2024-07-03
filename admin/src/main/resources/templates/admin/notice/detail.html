@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::section})}"
+<html th:replace="~{layout/base :: layout(~{::#css}, ~{::#script}, ~{::.inner})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block id="css">
@@ -11,45 +11,37 @@
 
 </head>
 <body>
-<section>
-    <div>
-        <span>공지 상세</span>
+<div class="inner">
+    <h2 class="page-tit">공지 상세</h2>
 
-        <div th:object="${notice}">
-            <div>
-                <label>
-                    <span>제목</span>
-                    <span th:text="*{title}"></span>
-                </label>
+    <div th:object="${notice}">
+        <div class="page-container board-container">
+            <p class="board-tit" th:text="*{title}"></p>
+
+            <div class="board-cont" th:utext="*{content}"></div>
+
+            <div class="file-top">
+                <p>첨부파일</p>
+                <a class="btn-txt small primary ico-l" th:if="*{files.size() > 1}" th:href="@{/admin/notice/zip/{id}(id=*{id})}"><img
+                    src="/image/common/file_download_primary_ico.svg" alt=""><span th:text="#{file.zip}"></span></a>
             </div>
-
-            <div>
-                <label>
-                    <span>내용</span>
-                    <div th:utext="*{content}"></div>
-                </label>
-            </div>
-
-            <div>
-                <label>첨부파일</label>
-                <a th:if="*{files.size() > 1}" th:href="@{/admin/notice/zip/{id}(id=*{id})}" th:text="#{file.zip}"></a>
-                <div>
-                    <div th:each="file : *{files}">
-                        <a th:href="@{/admin/notice/download/{fileId}(fileId=${file.id})}" th:text="${file.originFileName}"></a>
-                    </div>
-                </div>
-                <div th:if="*{files.size() <= 0}">
-                    <div>파일이 존재하지 않습니다.</div>
+            <div class="file-list">
+                <div th:each="file : *{files}" class="file-item">
+                    <a th:href="@{/admin/notice/download/{fileId}(fileId=${file.id})}" th:text="${file.originFileName}"></a>
                 </div>
             </div>
-
-            <div>
-                <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
-                <button type="button" th:onclick="pageObj.delete([[${notice.id}]])" th:text="#{btn.del}"></button>
-                <button type="button" th:onclick="$view.edit([[${notice.id}]])" th:text="#{btn.edit}"></button>
+            <div th:if="*{files.size() <= 0}">
+                <div>파일이 존재하지 않습니다.</div>
+            </div>
+        </div>
+        <div class="page-bottom spc-btw">
+            <button class="btn large outline-assistive" type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+            <div class="btn-area">
+                <button class="btn large outline-warning" type="button" th:onclick="pageObj.delete([[${notice.id}]])" th:text="#{btn.del}"></button>
+                <button class="btn large outline-secondary" type="button" th:onclick="$view.edit([[${notice.id}]])" th:text="#{btn.edit}"></button>
             </div>
         </div>
     </div>
-</section>
+</div>
 </body>
 </html>

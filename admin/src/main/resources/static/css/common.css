@@ -18,7 +18,7 @@
   --color-red-light: #FFE7E7;
   --color-green-normal: #01BA61;
   --color-green-light: #DDF9EB;
-  --nav-width: 280px;
+  --nav-width: 260px;
 }
 
 .wrap {
@@ -31,7 +31,7 @@
   position: fixed;
   width: var(--nav-width);
   height: 100%;
-  padding: 16px 18px;
+  padding: 16px 12px;
   top: 0;
   left: 0;
   background: #1B1B1B;
@@ -42,23 +42,36 @@
 }
 
 .nav-top__logo {
-  width: 244px;
+  width: 100%;
   height: 46px;
   background: #fff;
   opacity: 0.3;
 }
 
-.nav-menu li a {
+.nav-menu > li:not(:last-of-type) {
+  margin-bottom: 4px;
+}
+.nav-menu > li > a {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 20px 16px 20px 20px;
+  padding: 20px 18px;
   font-weight: 500;
+  border-radius: 6px;
   color: #fff;
 }
-.nav-menu li a img {
+.nav-menu > li > a img {
   width: 20px;
   height: 20px;
+}
+.nav-menu > li > a span {
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.nav-menu > li > a.on {
+  background: #2D2D2D;
 }
 
 .main-container {
@@ -204,7 +217,7 @@ input[type=checkbox]:checked {
 }
 
 .btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
@@ -295,8 +308,9 @@ input[type=checkbox]:checked {
 }
 
 .btn-txt {
-  display: flex;
-  gap: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 500;
   border-radius: 3px;
   transition: background-color ease 0.2s;
@@ -305,9 +319,23 @@ input[type=checkbox]:checked {
   padding: 3px 5px;
   font-size: 15px;
 }
+.btn-txt.small span {
+  font-size: 15px;
+}
+.btn-txt.small img {
+  width: 15px;
+  height: 15px;
+}
 .btn-txt.large {
   padding: 4px 6px;
   font-size: 16px;
+}
+.btn-txt.large span {
+  font-size: 16px;
+}
+.btn-txt.large img {
+  width: 16px;
+  height: 16px;
 }
 .btn-txt.primary {
   color: var(--color-primary);
@@ -327,11 +355,18 @@ input[type=checkbox]:checked {
 .btn-txt.ico-r img {
   margin-right: -2px;
 }
+.btn-txt span {
+  font-weight: 500;
+}
 
 .btn-area {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.spc-btw {
+  justify-content: space-between;
 }
 
 .label-txt {
@@ -382,6 +417,23 @@ input[type=text]:disabled, input[type=text]:read-only, input[type=password]:disa
   margin-bottom: 16px;
 }
 
+.board-container {
+  padding: 40px 48px;
+}
+
+.board-tit {
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  line-height: 1.3;
+  font-size: 24px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-normal);
+}
+
+.board-cont {
+  line-height: 1.8;
+}
+
 .file-upload {
   display: flex;
   flex-wrap: wrap;
@@ -405,7 +457,7 @@ input[type=text]:disabled, input[type=text]:read-only, input[type=password]:disa
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 8px 14px;
   font-weight: 500;
   border: 1px solid var(--border-normal);
   border-radius: 6px;
@@ -414,11 +466,79 @@ input[type=text]:disabled, input[type=text]:read-only, input[type=password]:disa
 .filenames .file_wraper:not(:last-of-type) {
   margin-bottom: 4px;
 }
-.filenames .file_wraper span {
+.filenames .file_wraper > span {
   width: calc(100% - 68px);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.file-list .file-item:not(:last-of-type) {
+  margin-bottom: 4px;
+}
+.file-list .file-item a {
+  position: relative;
+  display: block;
+  padding: 12px 14px 12px 38px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border: 1px solid var(--border-normal);
+  border-radius: 6px;
+  color: var(--label-neutral);
+  transition: background-color ease 0.2s;
+}
+.file-list .file-item a:hover {
+  background: var(--bg-gray-light);
+}
+.file-list .file-item a::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+  left: 14px;
+  background: url(../image/common/file_download_gray_rounded_ico.svg) center/cover no-repeat;
+}
+
+.file-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 32px 0 16px;
+}
+.file-top > p {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--label-neutral);
+}
+
+.swal2-popup {
+  border-radius: 6px;
+}
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.swal2-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--label-normal);
+}
+
+.swal2-styled {
+  min-width: 72px;
+  height: 48px;
+  padding: 0 20px;
+  line-height: 48px;
+  font-size: 15px !important;
+  font-weight: 500;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+}
+.swal2-styled.swal2-confirm {
+  background: var(--color-primary);
 }
 
 /*# sourceMappingURL=common.css.map */

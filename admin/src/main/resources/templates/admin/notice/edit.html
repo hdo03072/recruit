@@ -20,29 +20,30 @@
                 <span class="label-txt essential">제목</span>
                 <input type="text" th:field="*{title}" valid="essential" maxlength="100" placeholder="제목을 입력해 주세요">
             </div>
-        </div>
 
-        <textarea th:field="*{content}" editor="editor"></textarea>
+            <textarea th:field="*{content}" editor="editor"></textarea>
 
-        <div>
-            <label>첨부파일</label>
-            <div>
-                <label for="file_input" class="file_btn">
-                    <input type="file" id="file_input" class="file-input" multiple="multiple" />
-                </label>
-                <div class="filenames">
-                    <div class="file_wraper" th:each="file : ${notice.files}">
-                        <input type="hidden" name="savedFileIds" th:value="${file.id}" />
-                        <span th:text="${file.originFileName}"></span>
-                        <button type="button" onclick="$files.removeFile(this)"><img th:src="@{/images/common/close.svg}"></button>
+            <div class="form-file">
+                <span class="label-txt">첨부파일</span>
+                <div class="file-upload">
+                    <input type="text" placeholder="첨부파일을 선택해 주세요" disabled>
+                    <label for="file_input" class="upload-btn btn medium solid-assistive">
+                        파일찾기
+                        <input type="file" id="file_input" class="file-input" multiple="multiple" />
+                    </label>
+                    <div class="filenames">
+                        <div class="file_wraper" th:each="file : ${notice.files}">
+                            <input type="hidden" name="savedFileIds" th:value="${file.id}" />
+                            <span th:text="${file.originFileName}"></span>
+                            <button  class="btn-txt small secondary ico-l" type="button" onclick="$files.removeFile(this)"><img src="/image/common/cross_gray_ico.svg"><span>삭제</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div>
-            <button type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
-            <button type="button" onclick="pageObj.update()" th:text="#{btn.save}"></button>
+        <div class="page-bottom">
+            <button class="btn large outline-assistive" type="button" onclick="$view.main()" th:text="#{btn.list}"></button>
+            <button class="btn large solid-primary" type="button" onclick="pageObj.update()" th:text="#{btn.save}"></button>
         </div>
     </form>
 </div>
