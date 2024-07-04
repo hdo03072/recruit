@@ -530,15 +530,25 @@ input[type=text]:disabled, input[type=text]:read-only, input[type=password]:disa
 .swal2-styled {
   min-width: 72px;
   height: 48px;
+  margin: 0;
   padding: 0 20px;
   line-height: 48px;
   font-size: 15px !important;
   font-weight: 500;
   border: 1px solid transparent !important;
   border-radius: 6px !important;
+  box-shadow: none;
 }
-.swal2-styled.swal2-confirm {
-  background: var(--color-primary);
+.swal2-styled:focus, .swal2-styled:active {
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.swal2-actions {
+  gap: 8px;
+  width: 100%;
+  margin-top: 32px;
 }
 
 /*# sourceMappingURL=common.css.map */
