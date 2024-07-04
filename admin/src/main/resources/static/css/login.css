@@ -1,0 +1,37 @@
+.wrap {
+  position: relative;
+  height: 100vh;
+}
+
+.login-tit {
+  margin-bottom: 36px;
+  text-align: center;
+}
+.login-tit h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+}
+.login-tit p {
+  color: var(--label-alternative);
+}
+
+.form-login {
+  position: absolute;
+  width: 560px;
+  padding: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background: #fff;
+}
+.form-login input[type=text] {
+  margin-bottom: 12px;
+}
+.form-login .btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/*# sourceMappingURL=login.css.map */
