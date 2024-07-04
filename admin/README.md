@@ -16,6 +16,7 @@ Full Stack 1명, Designer & Publisher 1명
 * Java 17
 * JPA
 * Gradle
+* MariaDB
 
 ### 템플릿 엔진
 * Thymeleaf
