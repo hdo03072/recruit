@@ -749,39 +749,37 @@ $view = {
 $swal = {
     save: function (fn) {
         Swal.fire({
-            icon: 'info',
+            icon: 'success',
             title: '저장이 완료되었습니다.'
-
         }).then(function () {
            fn();
         })
     },
-    delete: function (fn) {
+    update: function (fn) {
         Swal.fire({
-            icon: "warning",
-            title: '삭제하시겠습니까?',
-            showCancelButton: true,
-            confirmButtonText: '예',
-            cancelButtonText: '아니오',
-            // confirmButtonColor: '#429f50',
-            // cancelButtonColor: '#d33'
-        }).then(result => {
-            if (result.isConfirmed) {
-                fn();
-            } else {
-                return false;
-            }
+            icon: 'success',
+            title: '수정이 완료되었습니다.'
+        }).then(function () {
+            fn();
         })
     },
-    confirm: function () {
+    delete: function (fn) {
+        Swal.fire({
+            icon: 'success',
+            title: '삭제가 완료되었습니다.'
+        }).then(function () {
+            fn();
+        })
+    },
+    confirm: function (options, fn) {
         Swal.fire({
             icon: options.icon,
             title: options.title,
             showCancelButton: true,
             confirmButtonText: options.confirmButtonText,
             cancelButtonText: options.cancelButtonText,
-            confirmButtonColor: '#429f50',
-            cancelButtonColor: '#d33'
+            // confirmButtonColor: '#429f50',
+            // cancelButtonColor: '#d33'
         }).then(result => {
             if (result.isConfirmed) {
                 fn();

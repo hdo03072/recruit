@@ -28,13 +28,20 @@ var pageObj = {
         $ajax.putMultiPart({
             data: $form.getData(),
             success: function (id) {
-                $view.detail(id);
+                $swal.update(function () {
+                    $view.detail(id)
+                })
             }
         })
     },
 
     delete: function (id) {
-        $swal.delete(function () {
+        $swal.confirm({
+            icon: "warning",
+            title: "삭제하시겠습니까?",
+            confirmButtonText: "예",
+            cancelButtonText: "아니오"
+        }, function () {
             $ajax.delete({
                 url: "/admin/notice/delete",
                 data: id,
@@ -54,7 +61,12 @@ var pageObj = {
             return false;
         }
 
-        $swal.delete(function () {
+        $swal.confirm({
+            icon: "warning",
+            title: "삭제하시겠습니까?",
+            confirmButtonText: "예",
+            cancelButtonText: "아니오"
+        }, function () {
             $ajax.delete({
                 url: "/admin/notice/deleteAll",
                 data: checked
