@@ -763,8 +763,8 @@ $swal = {
             showCancelButton: true,
             confirmButtonText: '예',
             cancelButtonText: '아니오',
-            confirmButtonColor: '#429f50',
-            cancelButtonColor: '#d33'
+            // confirmButtonColor: '#429f50',
+            // cancelButtonColor: '#d33'
         }).then(result => {
             if (result.isConfirmed) {
                 fn();
