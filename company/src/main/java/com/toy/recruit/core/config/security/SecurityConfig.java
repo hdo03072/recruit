@@ -36,7 +36,7 @@ public class SecurityConfig {
 
                         .authorizeHttpRequests((authorizeRequests) ->
                                 authorizeRequests
-                                        .requestMatchers(("/admin/**")).hasAnyRole("ADMIN")
+                                        .requestMatchers(("/user/**")).hasAnyRole("CEO", "EMPLOYEE")
                                         .anyRequest().authenticated())
 
                         .formLogin((formLogin) ->
@@ -53,9 +53,10 @@ public class SecurityConfig {
                                         .permitAll()
                         )
 
-                        .exceptionHandling((exceptionConfig) -> exceptionConfig
-                                .authenticationEntryPoint(new AjaxAuthenticationEntryPoint("/login"))
-                                .accessDeniedHandler(customAccessDeniedHandler))
+                        .exceptionHandling((exceptionConfig) ->
+                                exceptionConfig
+                                        .authenticationEntryPoint(new AjaxAuthenticationEntryPoint("/login"))
+                                        .accessDeniedHandler(customAccessDeniedHandler))
 
                         .authenticationProvider(authenticationProvider())
 

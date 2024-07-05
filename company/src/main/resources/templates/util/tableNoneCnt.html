@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <tr th:fragment="tableNoneCnt(cnt, trCnt)" th:if="${cnt <= 0}" class="empty">
+        <td th:colspan="${trCnt}">조회할 목록이 없습니다.</td>
+    </tr>
+</body>
+</html>
