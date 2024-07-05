@@ -11,11 +11,11 @@
                 nextBlock=${(number/blockSize*blockSize)+blockSize < totalPages ? (number/blockSize*blockSize)+blockSize : totalPages-1}">
 
         <li>
-            <button name="page" th:value="0"><img src="/image/common/pagination_start_ico.svg" alt=""></button>
+            <button name="page" th:value="0"><img src="/images/common/pagination_start_ico.svg" alt=""></button>
         </li>
 
         <li>
-            <button name="page" th:value="${prevBlock}"><img src="/image/common/pagination_prev_ico.svg" alt=""></button>
+            <button name="page" th:value="${prevBlock}"><img src="/images/common/pagination_prev_ico.svg" alt=""></button>
         </li>
 
 <!--        <li th:each="page : ${#numbers.sequence(start, end)}" th:classappend="${page eq pageResult.number + 1}?'pagination_active'">-->
@@ -26,11 +26,11 @@
         </li>
 
         <li>
-            <button name="page" th:value="${nextBlock}"><img src="/image/common/pagination_next_ico.svg" alt=""></button>
+            <button name="page" th:value="${nextBlock}"><img src="/images/common/pagination_next_ico.svg" alt=""></button>
         </li>
 
         <li>
-            <button name="page" th:value="*{totalPages-1}"><img src="/image/common/pagination_end_ico.svg" alt=""></button>
+            <button name="page" th:value="*{totalPages-1}"><img src="/images/common/pagination_end_ico.svg" alt=""></button>
         </li>
     </ul>
 </div>

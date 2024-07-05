@@ -13,7 +13,7 @@
 </head>
 <body>
 <form th:action method="post">
-    <div class="wrap">
+    <div class="wrap login-wrap">
         <div class="form-login">
             <div class="login-tit">
                 <h1>로그인</h1>
@@ -21,13 +21,13 @@
             </div>
             <input type="text" name="username" id="username" placeholder="아이디 입력">
             <input type="password" name="password" id="password" placeholder="비밀번호 입력">
-            <button class="btn large solid-primary" type="submit">로그인</button>
-        </div>
 
-        <div class="error_text"
-             th:if="${param.error}"
-             th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-            <span th:text="${errorMsg}">Wrong input!</span>
+            <div class="helper-txt warning"
+                 th:if="${param.error}"
+                 th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+                <span th:text="${errorMsg}">Wrong input!</span>
+            </div>
+            <button class="btn large solid-primary" type="submit">로그인</button>
         </div>
     </div>
 </form>
