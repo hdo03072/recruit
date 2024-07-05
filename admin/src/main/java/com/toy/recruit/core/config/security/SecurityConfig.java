@@ -27,11 +27,6 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
-//    @Bean
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return
@@ -41,20 +36,26 @@ public class SecurityConfig {
 
                         .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                                 .requestMatchers(("/admin/**")).authenticated()
-                                .requestMatchers(("/api/**")).authenticated()
                                 .anyRequest().permitAll())
 
-                        .formLogin((formLogin) ->
-                                formLogin.loginPage("/login"))
+                        .formLogin((formLogin) -> {
+                            formLogin.loginPage("/login")
+                                    .defaultSuccessUrl("/", true)
+                                    .successHandler(new LoginSuccessHandler())
+                                    .permitAll();
+                        })
 
-                        .logout((logoutConfig) ->
-                                logoutConfig.logoutSuccessUrl("/"))
+                        .logout((logoutConfig) -> {
+                            logoutConfig.logoutSuccessUrl("/")
+                                    .permitAll();
+                        })
 
                         .exceptionHandling((exceptionConfig) -> exceptionConfig
                                 .authenticationEntryPoint(new AjaxAuthenticationEntryPoint("/login"))
                                 .accessDeniedHandler(customAccessDeniedHandler))
 
                         .authenticationProvider(authenticationProvider())
+
                         .build();
     }
 
